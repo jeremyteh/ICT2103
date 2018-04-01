@@ -1,4 +1,4 @@
-package Task2;
+package Task3;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -10,7 +10,7 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
-public class Group14T2Mapper extends Mapper<LongWritable, Text, Text, IntWritable> {
+public class Group14T3Mapper extends Mapper<LongWritable, Text, Text, IntWritable> {
 	Hashtable<String, String> countryCodes = new Hashtable<>();
 	@Override
 	protected void setup(Mapper<LongWritable, Text, Text, IntWritable>.Context context)
@@ -40,10 +40,9 @@ public class Group14T2Mapper extends Mapper<LongWritable, Text, Text, IntWritabl
 			Mapper<LongWritable, Text, Text, IntWritable>.Context context)
 					throws IOException, InterruptedException{
 			String[] parts = value.toString().split(",");
-			String airlineStr;
 			String countryCodeStr;
 			String countryName;
-			if(parts.length == 27 && parts[14].equals("negative") && parts[10] != null) {
+			if(parts.length == 27 && parts[10] != null && parts[14].equals("negative") && (parts[15].equals("badflight") || parts[15].equals("CSProblem"))) {
 				countryCodeStr = parts[10].trim();
 				if(countryCodeStr!=null && !countryCodeStr.isEmpty()) {					
 					countryName = countryCodes.get(countryCodeStr);

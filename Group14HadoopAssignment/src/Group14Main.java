@@ -1,3 +1,4 @@
+import java.net.URI;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -13,7 +14,12 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 /*Import packages*/
 import Task1.Group14T1Mapper;
 import Task1.Group14T1Reducer;
-
+import Task2.Group14T2Mapper;
+import Task2.Group14T2Reducer;
+import Task3.Group14T3Mapper;
+import Task3.Group14T3Reducer;
+import Task4.Group14T4Mapper;
+import Task4.Group14T4Reducer;
 import Task5.Group14T5Mapper;
 import Task5.Group14T5Reducer;
 
@@ -53,6 +59,57 @@ public class Group14Main {
 				break;
 				
 			case 2:
+				//Put this file to the distributed cache so we can use it to join
+				job.addCacheFile(new URI("hdfs://localhost:9000/user/phamvanvung/airline/ISO-3166-alpha3.tsv"));
+				
+				job.setMapperClass(Group14T2Mapper.class);
+				job.setReducerClass(Group14T2Reducer.class);
+				
+				job.setOutputKeyClass(Text.class);
+				job.setOutputValueClass(IntWritable.class);
+				
+				outputPath = new Path("hdfs://localhost:9000/user/phamvanvung/airline/output/Group14Task2_"
+						+new Date().getTime());//use run-time as output folder
+				
+				FileInputFormat.addInputPath(job, inputPath);
+				FileOutputFormat.setOutputPath(job, outputPath);
+				
+				System.exit((job.waitForCompletion(true))?0:1);
+				break;
+				
+			case 3:
+				//Put this file to the distributed cache so we can use it to join
+				job.addCacheFile(new URI("hdfs://localhost:9000/user/phamvanvung/airline/ISO-3166-alpha3.tsv"));
+				
+				job.setMapperClass(Group14T3Mapper.class);
+				job.setReducerClass(Group14T3Reducer.class);
+				
+				job.setOutputKeyClass(Text.class);
+				job.setOutputValueClass(IntWritable.class);
+				
+				outputPath = new Path("hdfs://localhost:9000/user/phamvanvung/airline/output/Group14Task3_"
+						+new Date().getTime());//use run-time as output folder
+				
+				FileInputFormat.addInputPath(job, inputPath);
+				FileOutputFormat.setOutputPath(job, outputPath);
+				
+				System.exit((job.waitForCompletion(true))?0:1);
+				break;
+				
+			case 4:
+				job.setMapperClass(Group14T4Mapper.class);
+				job.setReducerClass(Group14T4Reducer.class);
+				
+				job.setOutputKeyClass(Text.class);
+				job.setOutputValueClass(IntWritable.class);
+				
+				outputPath = new Path("hdfs://localhost:9000/user/phamvanvung/airline/output/Group14Task4_"
+						+new Date().getTime());//use run-time as output folder
+				
+				FileInputFormat.addInputPath(job, inputPath);
+				FileOutputFormat.setOutputPath(job, outputPath);
+				
+				System.exit((job.waitForCompletion(true))?0:1);
 				break;
 				
 			case 5:
