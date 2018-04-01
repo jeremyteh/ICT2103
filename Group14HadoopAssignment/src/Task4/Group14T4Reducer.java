@@ -1,4 +1,4 @@
-package Task2;
+package Task4;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -13,8 +13,9 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
-public class Group14T2Reducer extends Reducer<Text, IntWritable, Text, IntWritable> {
-	HashMap<String, Integer> CountryCountMap = new HashMap<String, Integer>();
+public class Group14T4Reducer extends Reducer<Text, IntWritable, Text, IntWritable> {
+	
+	HashMap<String, Integer> AirlineCountMap = new HashMap<String, Integer>();
 	
 	@Override
 	protected void reduce(Text key, Iterable<IntWritable> values,
@@ -26,17 +27,17 @@ public class Group14T2Reducer extends Reducer<Text, IntWritable, Text, IntWritab
 			String aKey = key.toString();
 			int aValue = value.get();
 			
-			if(!CountryCountMap.containsKey(aKey)) {
+			if(!AirlineCountMap.containsKey(aKey)) {
 				
-				CountryCountMap.put(aKey, aValue);
+				AirlineCountMap.put(aKey, aValue);
 			}
 			else {
 				
-				int currentCount = CountryCountMap.get(aKey);
-				CountryCountMap.put(aKey, currentCount+1);
+				int currentCount = AirlineCountMap.get(aKey);
+				AirlineCountMap.put(aKey, currentCount+1);
 			}
 			
-		}
+		}		
 	}
 
 	@Override
@@ -44,12 +45,29 @@ public class Group14T2Reducer extends Reducer<Text, IntWritable, Text, IntWritab
 		// TODO Auto-generated method stub
 		super.cleanup(context);
 		
-		HashMap<String, Integer> individualNegReasonCountMap = sortHashMapByValues(CountryCountMap);
+		int counter = 0;
 		
-		String topCountry = individualNegReasonCountMap.entrySet().iterator().next().getKey();
-		int numberOfComplaints = individualNegReasonCountMap.entrySet().iterator().next().getValue();
+		HashMap<String, Integer> sortedAirlineCountMap = sortHashMapByValues(AirlineCountMap);
 		
-		context.write(new Text(topCountry), new IntWritable(numberOfComplaints));
+		String country;
+		int numberOfPosTweets;
+		
+		for(Map.Entry<String, Integer> airlineCountEntry : sortedAirlineCountMap.entrySet()) {
+			
+			if(counter < 3) {
+				
+				country = airlineCountEntry.getKey();
+				numberOfPosTweets = airlineCountEntry.getValue();
+				
+				context.write(new Text(country), new IntWritable(numberOfPosTweets));
+				
+				counter++;
+			}
+			else{ 
+				counter = 0;
+				break;
+			}			
+		}		
 	}
 	
 	// method to sort the HashMap
@@ -58,8 +76,8 @@ public class Group14T2Reducer extends Reducer<Text, IntWritable, Text, IntWritab
 		List<Map.Entry<String, Integer>> list = new LinkedList<Map.Entry<String, Integer>>(passedMap.entrySet());
 		Collections.sort(list, new Comparator<Map.Entry<String, Integer>>(){
 			
-			public int compare(Map.Entry<String, Integer> countryCount1, Map.Entry<String, Integer> countryCount2) {
-				return countryCount2.getValue().compareTo(countryCount1.getValue());
+			public int compare(Map.Entry<String, Integer> reasonCount1, Map.Entry<String, Integer> reasonCount2) {
+				return reasonCount2.getValue().compareTo(reasonCount1.getValue());
 			}
 		});
 		
