@@ -22,7 +22,6 @@ public class Group14T5Reducer extends Reducer<Text, FloatWritable, Text, FloatWr
 	protected void reduce(Text key, Iterable<FloatWritable> values,
 			Reducer<Text, FloatWritable, Text, FloatWritable>.Context context)
 				throws IOException, InterruptedException {
-		System.out.println("in reducer");
 		
 		for(FloatWritable value : values) {
 			

@@ -17,6 +17,11 @@ import Task1.Group14T1Reducer;
 import Task5.Group14T5Mapper;
 import Task5.Group14T5Reducer;
 
+import Task6.Group14T6Mapper;
+import Task6.Group14T6Reducer;
+
+import Task7.*;
+
 
 public class Group14Main {
 
@@ -63,6 +68,38 @@ public class Group14Main {
 				job.setOutputValueClass(FloatWritable.class);
 				
 				outputPath = new Path("hdfs://localhost:9000/user/phamvanvung/airline/output/Group14Task5_"
+						+new Date().getTime());//use run-time as output folder
+				
+				FileInputFormat.addInputPath(job, inputPath);
+				FileOutputFormat.setOutputPath(job, outputPath);
+				
+				System.exit((job.waitForCompletion(true))?0:1);
+				break;
+				
+			case 6:
+				job.setMapperClass(Group14T6Mapper.class);
+				job.setReducerClass(Group14T6Reducer.class);
+				
+				job.setOutputKeyClass(Text.class);
+				job.setOutputValueClass(IntWritable.class);
+				
+				outputPath = new Path("hdfs://localhost:9000/user/phamvanvung/airline/output/Group14Task6_"
+						+new Date().getTime());//use run-time as output folder
+				
+				FileInputFormat.addInputPath(job, inputPath);
+				FileOutputFormat.setOutputPath(job, outputPath);
+				
+				System.exit((job.waitForCompletion(true))?0:1);
+				break;
+				
+			case 7:
+				job.setMapperClass(Group14T7Mapper.class);
+				job.setReducerClass(Group14T7Reducer.class);
+				
+				job.setOutputKeyClass(Text.class);
+				job.setOutputValueClass(IntWritable.class);
+				
+				outputPath = new Path("hdfs://localhost:9000/user/phamvanvung/airline/output/Group14Task7_"
 						+new Date().getTime());//use run-time as output folder
 				
 				FileInputFormat.addInputPath(job, inputPath);

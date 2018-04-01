@@ -34,6 +34,7 @@ public class Group14T5Mapper extends Mapper<LongWritable, Text, Text, FloatWrita
 						context.write(airline, trustingPointWritable);
 					}
 				}
-			}
+			}	
 	}
+	
 }
