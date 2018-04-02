@@ -20,6 +20,7 @@ public class Group14T1Reducer extends Reducer<Text, Text, Text, Text> {
 	
 	HashMap<String, HashMap> AirlineNegReasonMap = new HashMap<String, HashMap>();
 	HashMap<String, Integer> NegReasonCountMap;
+	int TotalReasonCount = 0;
 	
 	@Override
 	protected void reduce(Text key, Iterable<Text> values,
@@ -30,6 +31,7 @@ public class Group14T1Reducer extends Reducer<Text, Text, Text, Text> {
 			
 			String aKey = key.toString();
 			String aValue = value.toString();
+			TotalReasonCount += 1;
 			
 			if(!AirlineNegReasonMap.containsKey(aKey)) {
 				
@@ -66,7 +68,7 @@ public class Group14T1Reducer extends Reducer<Text, Text, Text, Text> {
 		super.cleanup(context);
 		
 		int counter = 0;
-		
+		context.write(new Text("Total Reasons"), new Text(String.valueOf(TotalReasonCount)));
 
 		System.out.println(AirlineNegReasonMap.toString());
 		for(Map.Entry<String, HashMap> airlineEntry : AirlineNegReasonMap.entrySet()) {
