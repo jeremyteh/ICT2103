@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.FloatWritable;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
@@ -27,6 +28,12 @@ import Task6.Group14T6Mapper;
 import Task6.Group14T6Reducer;
 
 import Task7.*;
+import Task8.Group14T8Mapper;
+import Task8.Group14T8Reducer;
+import Task9One.Group14T9Mapper;
+import Task9One.Group14T9Reducer;
+import Task9Two.Group14T9Mapper2;
+import Task9Two.Group14T9Reducer2;
 
 
 public class Group14Main {
@@ -165,6 +172,59 @@ public class Group14Main {
 				System.exit((job.waitForCompletion(true))?0:1);
 				break;
 				
+			case 8:
+				job.setMapperClass(Group14T8Mapper.class);
+				job.setReducerClass(Group14T8Reducer.class);
+				
+				job.setOutputKeyClass(Text.class);
+				job.setOutputValueClass(IntWritable.class);
+				
+				outputPath = new Path("hdfs://localhost:9000/user/phamvanvung/airline/output/Group14Task8_"
+						+new Date().getTime());//use run-time as output folder
+				
+				job.setMapOutputValueClass(Text.class);
+				
+				FileInputFormat.addInputPath(job, inputPath);
+				FileOutputFormat.setOutputPath(job, outputPath);
+				
+				System.exit((job.waitForCompletion(true))?0:1);
+				break;
+				
+			case 9:
+				
+				job.setMapperClass(Group14T9Mapper.class);
+				job.setReducerClass(Group14T9Reducer.class);
+				
+				job.setOutputKeyClass(Text.class);
+				job.setOutputValueClass(IntWritable.class);
+				
+				outputPath = new Path("hdfs://localhost:9000/user/phamvanvung/airline/output/Group14Task9_"
+						+new Date().getTime());//use run-time as output folder
+				
+				FileInputFormat.addInputPath(job, inputPath);
+				FileOutputFormat.setOutputPath(job, outputPath);
+				
+				System.exit((job.waitForCompletion(true))?0:1);
+				break;
+				
+			case 10:
+				
+				job.setMapperClass(Group14T9Mapper2.class);
+				job.setReducerClass(Group14T9Reducer2.class);
+				
+				job.setOutputKeyClass(Text.class);
+				job.setOutputValueClass(IntWritable.class);
+				
+				outputPath = new Path("hdfs://localhost:9000/user/phamvanvung/airline/output/Group14Task10_"
+						+new Date().getTime());//use run-time as output folder
+				
+				job.setMapOutputValueClass(Text.class);
+				
+				FileInputFormat.addInputPath(job, inputPath);
+				FileOutputFormat.setOutputPath(job, outputPath);
+				
+				System.exit((job.waitForCompletion(true))?0:1);
+				break;
 				
 			default:
 				break;
