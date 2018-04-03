@@ -21,7 +21,7 @@ public class Group14T1Mapper extends Mapper<LongWritable, Text, Text, Text> {
 			if(parts.length == 27 && parts[14].equals("negative") && parts[15] != null && parts[16] != null) {
 				negativeReasonStr = parts[15].trim();
 				airlineStr = parts[16].trim();
-				if(negativeReasonStr!=null && !negativeReasonStr.isEmpty() && airlineStr!=null && !airlineStr.isEmpty()) {					
+				if(negativeReasonStr!=null && !negativeReasonStr.isEmpty() && airlineStr!=null && !airlineStr.isEmpty()) {	
 					negativeReason.set(negativeReasonStr);
 					airline.set(airlineStr);
 					context.write(airline, negativeReason);
