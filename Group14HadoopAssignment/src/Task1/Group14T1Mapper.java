@@ -16,10 +16,10 @@ public class Group14T1Mapper extends Mapper<LongWritable, Text, Text, Text> {
 	protected void map(LongWritable key, Text value, 
 			Mapper<LongWritable, Text, Text, Text>.Context context)
 					throws IOException, InterruptedException{
-			String[] parts = value.toString().split(",");
+			String[] parts = value.toString().split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
 			String airlineStr;
 			String negativeReasonStr;
-			if(parts.length == 27 && parts[14].equals("negative") && parts[15] != null && parts[16] != null) {
+			if(parts.length >= 17 && parts[14].equals("negative") && parts[15] != null && parts[16] != null) {
 				negativeReasonStr = parts[15].trim();
 				airlineStr = parts[16].trim();
 				if(negativeReasonStr!=null && !negativeReasonStr.isEmpty() && airlineStr!=null && !airlineStr.isEmpty()) {	

@@ -15,10 +15,13 @@ public class Group14T9Mapper extends Mapper<LongWritable, Text, Text, IntWritabl
 	protected void map(LongWritable key, Text value, 
 			Mapper<LongWritable, Text, Text, IntWritable>.Context context)
 					throws IOException, InterruptedException{
-			String[] parts = value.toString().split(",");
+			String[] parts = value.toString().split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
 			String channelStr;
 			
-			if(parts.length == 27 && parts[7] != null) {
+			if(key.get() == 0){
+				
+			}
+			else if(parts.length >= 8 && parts[7] != null) {
 				channelStr = parts[7].trim();
 				
 				if(channelStr!=null && !channelStr.isEmpty() ) {					

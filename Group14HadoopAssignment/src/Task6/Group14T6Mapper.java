@@ -18,12 +18,12 @@ public class Group14T6Mapper extends Mapper<LongWritable, Text, Text, IntWritabl
 			Mapper<LongWritable, Text, Text, IntWritable>.Context context)
 					throws IOException, InterruptedException{
 		
-		String[] parts = value.toString().split(",");
+		String[] parts = value.toString().split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
 		
-		if (parts.length == 27 && !parts[21].isEmpty() && parts[21].toLowerCase().matches(".*delay.*")){
+		if (parts.length >= 22 && !parts[21].isEmpty() && parts[21].toLowerCase().matches(".*delay.*")){
 			context.write(new Text("delay"), one);
 		}
-		else if(parts.length == 27 && !parts[21].isEmpty() && parts[21].toLowerCase().matches(".*#sfo.*")){
+		else if(parts.length >= 22 && !parts[21].isEmpty() && parts[21].toLowerCase().matches(".*#sfo.*")){
 			context.write(new Text("#sfo"), one);
 		}
 		

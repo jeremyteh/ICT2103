@@ -34,7 +34,6 @@ public class Group14T5Reducer extends Reducer<Text, FloatWritable, Text, FloatWr
 				TurningPointList = new ArrayList<Float>();
 				
 				TurningPointList.add(aValue);
-				//System.out.println(key.toString() +" : " +  value.toString());
 				AirlineTurningPointMap.put(aKey, TurningPointList);
 			}
 			else {
@@ -65,7 +64,6 @@ public class Group14T5Reducer extends Reducer<Text, FloatWritable, Text, FloatWr
 			}
 			
 			medianTurningPoint = TurningPointList.get(index);
-			System.out.println(airlineEntry.getKey() + " : " + medianTurningPoint);
 			context.write(new Text(airlineEntry.getKey()), new FloatWritable(medianTurningPoint));
 		}
 		

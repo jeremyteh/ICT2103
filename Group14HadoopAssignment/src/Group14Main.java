@@ -38,17 +38,18 @@ import Task9Time.Group14T9Reducer2;
 
 public class Group14Main {
 
-	public static void main(String[] args) throws Exception{
-		Configuration conf = new Configuration();
-		Job job = Job.getInstance(conf, "StatisticsAnalysis");
-		
-		job.setJarByClass(Group14Main.class);			
+	public static void main(String[] args) throws Exception{			
 		
 		Path inputPath = new Path("hdfs://localhost:9000/user/phamvanvung/airline/input");
 		Path outputPath;
 		
 		int userInput = 0;
-		
+		do{
+			Configuration conf = new Configuration();
+			Job job = Job.getInstance(conf, "StatisticsAnalysis");
+			
+			job.setJarByClass(Group14Main.class);
+			
 			menu();
 			Scanner scn = new Scanner(System.in);
 			userInput = scn.nextInt();
@@ -69,7 +70,8 @@ public class Group14Main {
 					FileInputFormat.addInputPath(job, inputPath);
 					FileOutputFormat.setOutputPath(job, outputPath);
 					
-					System.exit((job.waitForCompletion(true))?0:1);
+					//System.exit((job.waitForCompletion(true))?0:1);
+					job.waitForCompletion(true);
 					break;				
 				
 				case 2:
@@ -88,7 +90,7 @@ public class Group14Main {
 					FileInputFormat.addInputPath(job, inputPath);
 					FileOutputFormat.setOutputPath(job, outputPath);					
 					
-					System.exit((job.waitForCompletion(true))?0:1);
+					job.waitForCompletion(true);
 					break;
 					
 				case 3:
@@ -107,7 +109,7 @@ public class Group14Main {
 					FileInputFormat.addInputPath(job, inputPath);
 					FileOutputFormat.setOutputPath(job, outputPath);
 					
-					System.exit((job.waitForCompletion(true))?0:1);
+					job.waitForCompletion(true);
 					break;
 					
 				case 4:
@@ -123,7 +125,7 @@ public class Group14Main {
 					FileInputFormat.addInputPath(job, inputPath);
 					FileOutputFormat.setOutputPath(job, outputPath);
 					
-					System.exit((job.waitForCompletion(true))?0:1);
+					job.waitForCompletion(true);
 					break;
 					
 				case 5:
@@ -139,7 +141,7 @@ public class Group14Main {
 					FileInputFormat.addInputPath(job, inputPath);
 					FileOutputFormat.setOutputPath(job, outputPath);
 					
-					System.exit((job.waitForCompletion(true))?0:1);
+					job.waitForCompletion(true);
 					break;
 					
 				case 6:
@@ -155,7 +157,7 @@ public class Group14Main {
 					FileInputFormat.addInputPath(job, inputPath);
 					FileOutputFormat.setOutputPath(job, outputPath);
 					
-					System.exit((job.waitForCompletion(true))?0:1);
+					job.waitForCompletion(true);
 					break;
 					
 				case 7:
@@ -171,7 +173,7 @@ public class Group14Main {
 					FileInputFormat.addInputPath(job, inputPath);
 					FileOutputFormat.setOutputPath(job, outputPath);
 					
-					System.exit((job.waitForCompletion(true))?0:1);
+					job.waitForCompletion(true);
 					break;
 					
 				case 8:
@@ -193,7 +195,7 @@ public class Group14Main {
 					FileInputFormat.addInputPath(job, inputPath);
 					FileOutputFormat.setOutputPath(job, outputPath);
 					
-					System.exit((job.waitForCompletion(true))?0:1);
+					job.waitForCompletion(true);
 					break;
 					
 				case 9:
@@ -210,7 +212,7 @@ public class Group14Main {
 					FileInputFormat.addInputPath(job, inputPath);
 					FileOutputFormat.setOutputPath(job, outputPath);
 					
-					System.exit((job.waitForCompletion(true))?0:1);
+					job.waitForCompletion(true);
 					break;
 					
 				case 10:
@@ -229,12 +231,17 @@ public class Group14Main {
 					FileInputFormat.addInputPath(job, inputPath);
 					FileOutputFormat.setOutputPath(job, outputPath);
 					
-					System.exit((job.waitForCompletion(true))?0:1);
+					job.waitForCompletion(true);
+					break;
+					
+				case 0:
 					break;
 					
 				default:
+					System.out.println("Please enter a number between 1 and 10. Or 0 to exit");
 					break;
 			}		
+		}while(userInput != 0);
 	}
 	
 	public static void menu() {
@@ -249,7 +256,7 @@ public class Group14Main {
 		System.out.println("8. Sentiment Value Percentage Similarity");
 		System.out.println("9. Channel Popularity");
 		System.out.println("10. Frequency of posts during different times of day");
-		System.out.println("");
+		System.out.println("0. Quit");
 		System.out.print("Please enter an option between 1 and 10: ");
 	}
 	

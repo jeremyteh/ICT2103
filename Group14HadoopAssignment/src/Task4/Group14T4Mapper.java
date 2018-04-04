@@ -15,9 +15,9 @@ public class Group14T4Mapper extends Mapper<LongWritable, Text, Text, IntWritabl
 	protected void map(LongWritable key, Text value, 
 			Mapper<LongWritable, Text, Text, IntWritable>.Context context)
 					throws IOException, InterruptedException{
-			String[] parts = value.toString().split(",");
+			String[] parts = value.toString().split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
 			String airlineStr;
-			if(parts.length == 27 && parts[14].equals("positive") && parts[16] != null) {
+			if(parts.length >= 17 && parts[14].equals("positive") && parts[16] != null) {
 				airlineStr = parts[16].trim();
 				if(airlineStr!=null && !airlineStr.isEmpty()) {					
 					airline.set(airlineStr);

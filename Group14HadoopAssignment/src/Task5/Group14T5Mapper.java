@@ -17,11 +17,11 @@ public class Group14T5Mapper extends Mapper<LongWritable, Text, Text, FloatWrita
 	protected void map(LongWritable key, Text value, 
 			Mapper<LongWritable, Text, Text, FloatWritable>.Context context)
 					throws IOException, InterruptedException{
-			String[] parts = value.toString().split(",");
+			String[] parts = value.toString().split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
 			
 			String airlineStr;
 			float trustingPoint;
-			if(parts.length == 27 && parts[8] != null && parts[16] != null) {
+			if(parts.length >= 17 && parts[8] != null && parts[16] != null) {
 				
 				if(parts[8].equals("_trust")){
 					

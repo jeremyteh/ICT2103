@@ -16,9 +16,9 @@ public class Group14T7Mapper extends Mapper<LongWritable, Text, Text, IntWritabl
 	@Override
 	protected void map(LongWritable key, Text value, Mapper<LongWritable, Text, Text, IntWritable>.Context context)
 			throws IOException, InterruptedException {
-		String[] parts = value.toString().split(",");
+		String[] parts = value.toString().split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
 		
-		if(key.get() == 0 && parts.length == 27){
+		if(key.get() == 0 && parts.length >= (ipIndex + 1)){
 			for (int x = 0; x < parts.length; x++){
 				if (parts[x].equals("_ip")){
 					ipIndex = x;
@@ -27,7 +27,7 @@ public class Group14T7Mapper extends Mapper<LongWritable, Text, Text, IntWritabl
 			}
 		}
 		else{
-			if (parts.length == 27 && !parts[ipIndex].isEmpty()){
+			if (parts.length >= (ipIndex + 1) && !parts[ipIndex].isEmpty()){
 				context.write(new Text(parts[ipIndex]), one);
 			}
 		}

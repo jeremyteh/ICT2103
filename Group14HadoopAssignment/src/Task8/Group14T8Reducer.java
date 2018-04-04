@@ -9,7 +9,6 @@ import org.apache.hadoop.mapreduce.Reducer;
 public class Group14T8Reducer extends Reducer<Text, Text, Text, Text> {
 
 	public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
-		System.out.println(key.toString());
 		
 		if(key.toString().equals("Result")){
 			double count = 0;

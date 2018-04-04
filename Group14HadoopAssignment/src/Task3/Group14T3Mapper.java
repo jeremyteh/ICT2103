@@ -40,10 +40,10 @@ public class Group14T3Mapper extends Mapper<LongWritable, Text, Text, IntWritabl
 	protected void map(LongWritable key, Text value, 
 			Mapper<LongWritable, Text, Text, IntWritable>.Context context)
 					throws IOException, InterruptedException{
-			String[] parts = value.toString().split(",");
+			String[] parts = value.toString().split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
 			String countryCodeStr;
 			String countryName;
-			if(parts.length == 27 && parts[10] != null && parts[14].equals("negative") && (parts[15].equals("badflight") || parts[15].equals("CSProblem"))) {
+			if(parts.length >= 16 && parts[10] != null && parts[14].equals("negative") && (parts[15].equals("badflight") || parts[15].equals("CSProblem"))) {
 				countryCodeStr = parts[10].trim();
 				if(countryCodeStr!=null && !countryCodeStr.isEmpty()) {					
 					countryName = countryCodes.get(countryCodeStr);
