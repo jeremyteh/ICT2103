@@ -16,6 +16,7 @@ import org.apache.hadoop.io.WritableUtils;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.util.ReflectionUtils;
 
+/** Task Done By : Aw Yee Cheong (1602328) **/
 public class Group14T1Reducer extends Reducer<Text, Text, Text, Text> {
 	
 	HashMap<String, HashMap> AirlineNegReasonMap = new HashMap<String, HashMap>();
@@ -48,7 +49,6 @@ public class Group14T1Reducer extends Reducer<Text, Text, Text, Text> {
 				if(!currentNegReasonCountMap.containsKey(aValue)) {
 					
 					currentNegReasonCountMap.put(aValue, 1);
-					//System.out.println(key.toString() +" : " +  value.toString());
 					AirlineNegReasonMap.put(aKey, currentNegReasonCountMap);
 		
 				}
@@ -64,7 +64,7 @@ public class Group14T1Reducer extends Reducer<Text, Text, Text, Text> {
 
 	@Override
 	protected void cleanup(Reducer<Text, Text, Text, Text>.Context context) throws IOException, InterruptedException {
-		// TODO Auto-generated method stub
+		
 		super.cleanup(context);
 		
 		int counter = 0;
@@ -73,7 +73,6 @@ public class Group14T1Reducer extends Reducer<Text, Text, Text, Text> {
 		System.out.println(AirlineNegReasonMap.toString());
 		for(Map.Entry<String, HashMap> airlineEntry : AirlineNegReasonMap.entrySet()) {
 			
-			//System.out.println(airlineEntry.getKey().toString());
 			HashMap<String, Integer> individualNegReasonCountMap = sortHashMapByValues(airlineEntry.getValue());
 			
 			String hashMapTop5NegReasons = "";
@@ -83,8 +82,6 @@ public class Group14T1Reducer extends Reducer<Text, Text, Text, Text> {
 				if(counter < 5) {
 					
 					hashMapTop5NegReasons += reasonEntry.getKey() + ", ";
-					//System.out.println(airlineEntry.getKey() + " : "+ hashMapTop5NegReasons);
-					
 					counter++;
 				}
 				else{ 

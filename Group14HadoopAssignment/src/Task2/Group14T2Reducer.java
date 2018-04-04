@@ -13,6 +13,7 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
+/** Task Done By : Aw Yee Cheong (1602328) **/
 public class Group14T2Reducer extends Reducer<Text, IntWritable, Text, IntWritable> {
 	HashMap<String, Integer> CountryCountMap = new HashMap<String, Integer>();
 	
@@ -41,7 +42,7 @@ public class Group14T2Reducer extends Reducer<Text, IntWritable, Text, IntWritab
 
 	@Override
 	protected void cleanup(Reducer<Text, IntWritable, Text, IntWritable>.Context context) throws IOException, InterruptedException {
-		// TODO Auto-generated method stub
+		
 		super.cleanup(context);
 		
 		HashMap<String, Integer> individualNegReasonCountMap = sortHashMapByValues(CountryCountMap);

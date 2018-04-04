@@ -11,6 +11,7 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
+/** Task Done By : Teo Hwee Boon (1602086) **/
 public class Group14T6Reducer extends Reducer<Text, IntWritable, Text, IntWritable> {
 	
 	@Override

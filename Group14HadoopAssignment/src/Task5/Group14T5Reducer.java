@@ -13,6 +13,7 @@ import org.apache.hadoop.io.FloatWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
+/** Task Done By : Teh Yong Sheng, Jeremy (1602514) **/
 public class Group14T5Reducer extends Reducer<Text, FloatWritable, Text, FloatWritable> {
 
 	HashMap<String, List<Float>> AirlineTurningPointMap = new HashMap<String, List<Float>>();

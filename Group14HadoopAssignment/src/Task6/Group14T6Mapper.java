@@ -8,6 +8,7 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
+/** Task Done By : Teo Hwee Boon (1602086) **/
 public class Group14T6Mapper extends Mapper<LongWritable, Text, Text, IntWritable> {
 
 	IntWritable one = new IntWritable(1);

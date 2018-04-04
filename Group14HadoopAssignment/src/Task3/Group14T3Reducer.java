@@ -13,6 +13,7 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
+/** Task Done By : Aw Yee Cheong (1602328) **/
 public class Group14T3Reducer extends Reducer<Text, IntWritable, Text, IntWritable> {
 HashMap<String, Integer> CountryCountMap = new HashMap<String, Integer>();
 	

@@ -7,6 +7,7 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
+/** Task Done By : Teh Yong Sheng, Jeremy (1602514) **/
 public class Group14T4Mapper extends Mapper<LongWritable, Text, Text, IntWritable> {
 	Text airline = new Text();
 	

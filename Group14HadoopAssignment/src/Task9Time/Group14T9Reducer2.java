@@ -1,4 +1,4 @@
-package Task9Two;
+package Task9Time;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -12,6 +12,7 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
+/** Task Done By : Teo Hwee Boon (1602086) **/
 public class Group14T9Reducer2 extends Reducer<Text, Text, Text, IntWritable> {
 	
 	int[] timeCount = new int[24];
@@ -33,7 +34,6 @@ public class Group14T9Reducer2 extends Reducer<Text, Text, Text, IntWritable> {
 		for(Text value : values) {
 			
 			String aValue = value.toString();
-			System.out.println(value);
 			convertStringToDate(aValue);			
 		}
 		
@@ -43,7 +43,7 @@ public class Group14T9Reducer2 extends Reducer<Text, Text, Text, IntWritable> {
 	@Override
 	protected void cleanup(Reducer<Text, Text, Text, IntWritable>.Context context)
 			throws IOException, InterruptedException {
-		// TODO Auto-generated method stub
+		
 		super.cleanup(context);
 		
 		for(int i=0; i < 24; i++) {
@@ -61,8 +61,7 @@ public class Group14T9Reducer2 extends Reducer<Text, Text, Text, IntWritable> {
 		try {
 			Date startDate = serverDateFormat.parse(tweetDate);
 		    DateFormat displayDateFormat = new SimpleDateFormat("HH:mm"); 
-		    String newTimeString = displayDateFormat.format(startDate);
-		    System.out.println(newTimeString);	    
+		    String newTimeString = displayDateFormat.format(startDate);	    
 		    
 		    SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
 		    Date zero = parser.parse("00:00");

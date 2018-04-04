@@ -10,6 +10,7 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
+/** Task Done By : Aw Yee Cheong (1602328) **/
 public class Group14T2Mapper extends Mapper<LongWritable, Text, Text, IntWritable> {
 	Hashtable<String, String> countryCodes = new Hashtable<>();
 	@Override
@@ -40,7 +41,6 @@ public class Group14T2Mapper extends Mapper<LongWritable, Text, Text, IntWritabl
 			Mapper<LongWritable, Text, Text, IntWritable>.Context context)
 					throws IOException, InterruptedException{
 			String[] parts = value.toString().split(",");
-			String airlineStr;
 			String countryCodeStr;
 			String countryName;
 			if(parts.length == 27 && parts[14].equals("negative") && parts[10] != null) {

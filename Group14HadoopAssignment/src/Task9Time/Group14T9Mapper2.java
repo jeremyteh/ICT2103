@@ -1,4 +1,4 @@
-package Task9Two;
+package Task9Time;
 
 import java.io.IOException;
 
@@ -7,6 +7,7 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
+/** Task Done By : Teo Hwee Boon (1602086)**/
 public class Group14T9Mapper2 extends Mapper<LongWritable, Text, Text, Text> {
 	
 	Text ipAddress = new Text();

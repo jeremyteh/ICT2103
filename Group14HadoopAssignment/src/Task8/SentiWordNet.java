@@ -1,14 +1,17 @@
 package Task8;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
+/** Task Done By : Md Zulfiqah (1602575) **/
 public class SentiWordNet {
-	private String sentiWordNetFile = "src/Task8/SentiWordNet_3.0.0.txt";
+	
+	File f = new File("src/Task8/SentiWordNet_3.0.0.txt");
     private HashMap<String, Double> _dict;
 
     public SentiWordNet(){
@@ -16,7 +19,7 @@ public class SentiWordNet {
         _dict = new HashMap<String, Double>();
         HashMap<String, Vector<Double>> _temp = new HashMap<String, Vector<Double>>();
         try{
-            BufferedReader csv =  new BufferedReader(new FileReader(sentiWordNetFile));
+            BufferedReader csv =  new BufferedReader(new FileReader(f.getAbsolutePath()));
             String line = "";           
             while((line = csv.readLine()) != null)
             {

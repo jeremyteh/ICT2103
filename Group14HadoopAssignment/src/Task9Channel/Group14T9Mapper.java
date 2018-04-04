@@ -1,4 +1,4 @@
-package Task9One;
+package Task9Channel;
 
 import java.io.IOException;
 
@@ -7,6 +7,7 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
+/** Task Done By : Teh Yong Sheng, Jeremy (1602514)**/
 public class Group14T9Mapper extends Mapper<LongWritable, Text, Text, IntWritable> {
 	Text channel = new Text();
 		

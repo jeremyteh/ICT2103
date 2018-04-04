@@ -6,6 +6,7 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Mapper.Context;
 
+/** Task Done By : Aw Yee Cheong (1602328) **/
 public class Group14T1Mapper extends Mapper<LongWritable, Text, Text, Text> {
 	
 	Text airline = new Text();

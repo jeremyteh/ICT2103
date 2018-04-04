@@ -1,4 +1,4 @@
-package Task9One;
+package Task9Channel;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -14,6 +14,7 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
+/** Task Done By : Teh Yong Sheng, Jeremy (1602514)**/
 public class Group14T9Reducer extends Reducer<Text, IntWritable, Text, IntWritable>{
 	
 	HashMap<String, Integer> ChannelCountMap = new HashMap<String, Integer>();

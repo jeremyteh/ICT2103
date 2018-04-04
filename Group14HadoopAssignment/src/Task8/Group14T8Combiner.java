@@ -14,52 +14,50 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
-public class Group14T8Reducer extends Reducer<Text, Text, Text, IntWritable> {
+/** Task Done By : Md Zulfiqah (1602575) **/
+public class Group14T8Combiner extends Reducer<Text, Text, Text, Text> {
+	
+	SentiWordNet test;
+	
+	@Override
+	protected void setup(Context context){
+		test = new SentiWordNet();
+	}
 	
 	@Override
 	protected void reduce(Text key, Iterable<Text> values,
-			Reducer<Text, Text, Text, IntWritable>.Context context)
+			Reducer<Text, Text, Text, Text>.Context context)
 				throws IOException, InterruptedException {
 		
-		System.out.println("Hel");
-		int totalCount = 0;
-		int similarityCount = 0;
+		String firstSentiment = values.iterator().next().toString();
+		String sentimentValue = "";
 		
-		for(Text value : values) {
-			String aKey = key.toString();
-			String aValue = value.toString();
-			String sentimentValue = "";
-			
-			SentiWordNet test = new SentiWordNet();
-			String[] words = aValue.split("\\s+"); 
-			double totalScore = 0;
-			for(String word : words) {
-			    word = word.replaceAll("([^a-zA-Z\\s])", "");
-			    if (test.extract(word) == null)
-			        continue;
-			    totalScore += test.extract(word);
-			}
-			
-			if(totalScore > 0) {
-				sentimentValue = "positive";
-			}
-			else if(totalScore == 0) {
-				sentimentValue = "neutral";
-			}
-			else if(totalScore < 0){
-				sentimentValue = "negative";
-			}
-			
-			if(sentimentValue.equals(aKey)) {
-				similarityCount ++;
-			}
-			
-			totalCount++;
+		String[] words = key.toString().split("\\s+"); 
+		
+		double totalScore = 0;
+		
+		for(String word : words) {
+		    word = word.replaceAll("([^a-zA-Z\\s])", "");
+		    if (test.extract(word) == null)
+		        continue;
+		    totalScore += test.extract(word);
 		}
 		
-		int percentage = similarityCount / totalCount;
-		System.out.println("Hello" + percentage);
+		if(totalScore > 0) {
+			sentimentValue = "positive";
+		}
+		else if(totalScore == 0) {
+			sentimentValue = "neutral";
+		}
+		else if(totalScore < 0){
+			sentimentValue = "negative";
+		}
 		
-		context.write(new Text("Percentage"), new IntWritable(percentage));		
+		if(firstSentiment.equals(sentimentValue)){
+			context.write(new Text("Result"), new Text("1"));	
+		}
+		else{
+			context.write(new Text("Result"), new Text("0"));	
+		}	
 	}
 }

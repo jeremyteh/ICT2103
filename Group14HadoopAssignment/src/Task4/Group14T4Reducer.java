@@ -13,6 +13,7 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
+/** Task Done By : Teh Yong Sheng, Jeremy (1602514) **/
 public class Group14T4Reducer extends Reducer<Text, IntWritable, Text, IntWritable> {
 	
 	HashMap<String, Integer> AirlineCountMap = new HashMap<String, Integer>();

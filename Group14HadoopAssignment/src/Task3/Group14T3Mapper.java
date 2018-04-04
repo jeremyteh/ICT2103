@@ -10,6 +10,7 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
+/** Task Done By : Aw Yee Cheong (1602328) **/
 public class Group14T3Mapper extends Mapper<LongWritable, Text, Text, IntWritable> {
 	Hashtable<String, String> countryCodes = new Hashtable<>();
 	@Override
